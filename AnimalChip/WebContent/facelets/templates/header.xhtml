@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://java.sun.com/jsf/html" 
+    xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+      
+<h:head>
+
+</h:head> 
+<h:body>
+<h:outputStylesheet library="css" name="base.css"  />
+	<p:panelGrid  styleClass="headTable">
+		<p:row>
+		<!-- Fila de Spacing -->
+			<p:column>
+				<h:graphicImage value="/imagenes/spacer.gif" width="610" height="1" border="0" style="img"/>
+			</p:column>
+			<p:column>
+				<h:graphicImage value="/imagenes/spacer.gif" width="177" height="1" border="0"/>
+			</p:column>
+			<p:column>
+				<h:graphicImage value="/imagenes/spacer.gif" width="313" height="1" border="0"/>
+			</p:column>
+			<p:column>
+				<h:graphicImage value="/imagenes/spacer.gif" width="1" height="1" border="0"/>
+			</p:column>
+		</p:row>
+		
+		<!-- Fila con imagen  -->
+		<ui:composition>
+		 
+		<p:row>
+			<p:column>
+				<h:graphicImage value="#{headerImage}" width="610" height="308" border="0"/>
+			</p:column>
+			<p:column style="font-size: 13px; font-family: Tahoma, Geneva, sans-serif; background-image: url(${facesContext.externalContext.requestContextPath}/imagenes/verde.jpg); font-weight: bold; color: #FFF; text-align: right;">
+				<!-- Tabla con los links -->
+				<h:panelGrid columns="1" stylClass="navTable"  >
+					<h:link value="¿Quiénes Somos?" outcome="/index" />
+					<h:link value="¿Qué ofrecemos?" outcome="/ofrecemos" />
+					<h:link value="Productos" outcome="/productos" />					
+					<h:link value="Clientes Afiliados" />					
+					<h:link value="Preguntas frecuentes" outcome="/preguntas" />
+					<h:link value="Contáctenos" outcome="/contact" />
+					<div></div>
+					<h:link value="Ingresar" outcome="/usuarios" />
+					<h:link value="Intranet" outcome="/administrador" />
+				</h:panelGrid>
+				
+			</p:column>
+			<p:column>
+				<h:graphicImage value="/imagenes/derech.jpg" width="313" height="308" border="0"/>
+			</p:column>
+			<p:column>
+				<h:graphicImage value="/imagenes/spacer.gif" width="1" height="308" border="0"/>
+			</p:column>
+		</p:row>
+		</ui:composition>
+		
+	</p:panelGrid>
+</h:body>
+
+</html>

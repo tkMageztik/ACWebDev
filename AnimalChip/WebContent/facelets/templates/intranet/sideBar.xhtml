@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://java.sun.com/jsf/html" 
+    xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+      
+
+<h:head>
+	
+</h:head>
+<h:body>
+	
+	<ui:composition>
+	
+	<h:form>
+	
+		<p:menu id="menuAsistenteAdminsitrador" rendered="#{usuarioLoginAction.oUsuario.rol.id==7}">
+	        <p:submenu label="Microchips">  
+				<p:menuitem value="Entrega de microchips" outcome="/pages/registroEntregaRfid."/>
+			</p:submenu>
+			<p:submenu label="Proceso">    
+				<p:menuitem value="Reporte de Mascota Extraviada" outcome="/pages/reporteMascotaExtraviada"/>
+			    <p:menuitem value="Busqueda de Mascota Extraviada" outcome="/pages/busquedaAnimalPerdido"/>			  
+			</p:submenu>
+			<p:submenu label="Salir">  
+				<p:menuitem value="Salir" action="#{usuarioLoginAction.logout}" />	        
+			</p:submenu>
+	
+	    </p:menu>  
+	   	
+	   	<p:menu id="menuAdministrador" rendered="#{usuarioLoginAction.oUsuario.rol.id==3}">
+			<p:submenu label="Usuario">
+				<p:menuitem value="Registro de Usuarios" outcome="/pages/mantenimientoUsuarios"/>
+			</p:submenu>
+	        <p:submenu label="Registro">  
+			    <p:menuitem value="Entrega de microchips" outcome="/pages/registroEntregaRfid"/>
+			    <p:menuitem value="Extravio de mascotas" outcome="/pages/registroAnimalPerdido"/>			    		
+			</p:submenu>
+			<p:submenu label="Busquedas">
+				<p:menuitem value="Busqueda de Mascota" outcome="/pages/registroAnimalPerdido"/>
+				<p:menuitem value="Busqueda de Mascota Extraviada" outcome="/pages/registroAnimalPerdido"/>
+			</p:submenu>
+		
+			
+			<p:submenu label="Reportes"> 			
+				<p:menuitem value="Listado de Microchip" outcome="/pages/reporteMascotaExtraviada"/>
+				<p:menuitem value="Reporte Mascotas Extraviada" outcome="/pages/reporteMascotaExtraviada"/>
+				<p:menuitem value="Otros" outcome="/pages/reportes"/>
+			</p:submenu>    	  
+			
+			<p:submenu label="Sistema">
+				<p:menuitem value="Salir" action="#{usuarioLoginAction.logout}" />	        
+			</p:submenu>
+	
+	    </p:menu>  
+	   
+	    <p:menu id="menuEmpresa" rendered="#{usuarioLoginAction.oUsuario.rol.id==2}">
+	    	<p:submenu label="Usuarios">    
+	   			<p:menuitem value="Registro de Usuarios" outcome="/pages/mantenimientoUsuariosEmpresa"/>
+		  	</p:submenu>	  
+		  	<p:submenu label="Proceso">    
+	   			<p:menuitem value="Registro de Mascotas" outcome="/pages/registroMascota"/>
+	   			<p:menuitem value="Registro Animal Extraviado" outcome="/pages/registroAnimalPerdido"/>
+	   			<p:menuitem value="Registro Ficha Médica" outcome="/pages/registroFichaMedica"/>  
+	   			<p:menuitem value="Reporte de Mascota Extraviada" outcome="/pages/reporteMascotaExtraviada"/>
+	   			<p:menuitem value="Busqueda de Mascota Extraviada" outcome="/pages/busquedaAnimalPerdido"/>
+	   			 		
+		  	</p:submenu>
+		  	<p:submenu label="Salir">  
+				<p:menuitem value="Salir" action="#{usuarioLoginAction.logout}" />	        
+			</p:submenu>
+	
+	    </p:menu>  				
+	
+	   <p:menu id="menuVeterinario" rendered="#{usuarioLoginAction.oUsuario.rol.id==1}">
+	      	<p:submenu label="Proceso">    
+	   			<p:menuitem value="Registro de Mascotas" outcome="/pages/registroMascota"/>
+	   			<p:menuitem value="Registro Animal Extraviado" outcome="/pages/registroAnimalPerdido"/>
+	   			<p:menuitem value="Registro Ficha Médica" outcome="/pages/registroFichaMedica"/>   		
+		  	</p:submenu>
+		  	<p:submenu label="Salir">  
+				<p:menuitem value="Salir" action="#{usuarioLoginAction.logout}" />	        
+			</p:submenu>	
+	
+		</p:menu>
+	  	
+	</h:form>
+	</ui:composition>
+	
+	
+</h:body>
+
+</html>

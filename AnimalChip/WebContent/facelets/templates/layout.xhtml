@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://java.sun.com/jsf/html" 
+    xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+      
+<h:head>
+
+</h:head> 
+<h:body>
+<h:outputStylesheet library="css" name="base.css"  />
+	<p:panelGrid  styleClass="templateTable">
+		<p:row>
+		<!-- Fila de Spacing -->
+			<p:column>
+				<h:graphicImage value="/imagenes/spacer.gif" width="610" height="1" border="0" style="img"/>
+			</p:column>
+			<p:column>
+				<h:graphicImage value="/imagenes/spacer.gif" width="177" height="1" border="0"/>
+			</p:column>
+			<p:column>
+				<h:graphicImage value="/imagenes/spacer.gif" width="313" height="1" border="0"/>
+			</p:column>
+			<p:column>
+				<h:graphicImage value="/imagenes/spacer.gif" width="1" height="1" border="0"/>
+			</p:column>
+		</p:row>
+		<!-- Header -->
+		
+		<ui:insert name="header" >
+			<ui:include src="/facelets/templates/header.xhtml" >
+			 	<ui:param name="headerImage" value="#{compHeaderImage}"/>
+			 </ui:include>
+		</ui:insert>
+		
+		<!-- Contenido -->
+		<p:row>
+			<p:column colspan="2">
+				<ui:insert name="content" >
+					<ui:include src="/facelets/templates/content.xhtml" />
+				</ui:insert>
+			</p:column>
+			<p:column colspan="2">			
+				<ui:insert name="userMenu" >
+					<ui:include src="/facelets/templates/usuarioPerfil.xhtml" />
+				</ui:insert>
+			
+				<h:graphicImage value="/imagenes/spacer.gif" width="330" height="369" border="0"/>				
+			</p:column>
+		</p:row>
+		<!-- Footer -->
+	
+		
+		<!-- Definir el footer aqui -->
+<!-- 		<ui:insert name="footer" > -->
+<!-- 				<ui:include src="/facelets/templates/footer.xhtml" /> -->
+<!-- 		</ui:insert> -->
+	
+	
+	</p:panelGrid>
+</h:body>
+
+</html>

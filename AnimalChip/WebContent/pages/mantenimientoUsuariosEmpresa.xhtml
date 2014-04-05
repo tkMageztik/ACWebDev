@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://java.sun.com/jsf/html" 
+    xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+      
+<h:head>
+
+</h:head> 
+<h:body>
+	<ui:composition template="/facelets/templates/intranet/intLayout.xhtml">
+	<ui:define name="content">	
+		<p:growl showDetail="true" autoUpdate="true" />
+		
+			<h:form id="frmDatosEmpresa">
+			<p:panel id="pnlDatosEmpresa" header="Datos de la Empresa">							
+				<h:panelGrid columns="3">
+				
+				<h:outputText value="Razon Social" style="width:100px;"/>
+				<p:spacer width="100" height="25" />
+				<h:inputText value="#{mantUsuarioEmpresaAction.usuarioLogeado.empresa.razonSocial}" style="font-weight:bold"/>
+								
+				<h:outputText value="Usuarios Permitidos" style="width:100px;"/>
+				<p:spacer width="100" height="25" />				  
+				<h:outputText value="#{mantUsuarioEmpresaAction.usuarioLogeado.empresa.maximoUsuarios}" style="width:100px;"/>
+
+				<h:outputText value="Actualizar" style="width:100px;"/>
+				<p:spacer width="100" height="25" />
+			  	<p:commandButton value="Actualizar Empresa" action="#{mantUsuarioEmpresaAction.actualizarEmpresa}"/>
+
+				</h:panelGrid>
+			</p:panel>
+			</h:form>	
+			
+			<h:form id="frmUsuariosEmpresa">    
+			<p:panel id="pnlListaUsuarios" header="Listado de Usuarios">				
+				<p:dataTable id="tableUsuarios" var="usuario" value="#{mantUsuarioEmpresaAction.listaUsuariosEmpresa}" rowKey="#{usuario.id}"
+    	        	wigdetvar="tableUsuarios" selection="#{mantUsuarioEmpresaAction.usuarioSeleccionado}" selectionMode="single">  
+
+	  	  		<p:ajax event="rowSelect"    
+                    update="btnActualizarUsuario btnActEstadoUsuario :updateForm:updateDialog  :actEstadoForm:actEstadoDialog"  
+                    />
+                    
+		        <p:column headerText="Login">  
+		            #{usuario.usuario}  
+		        </p:column>  
+
+		        <p:column headerText="Password">  
+		            #{usuario.password}  
+		        </p:column>  
+
+		        <p:column headerText="Nombres" >  
+		            #{usuario.nombres}  
+		        </p:column>
+		        
+		        <p:column headerText="Apellido Paterno" >  
+		            #{usuario.apellidoPat}  
+		        </p:column>  		  
+		        
+		        <p:column headerText="Apellido Materno" >  
+		            #{usuario.apellidoMat}  
+		        </p:column>  		    		  
+
+				 <p:column headerText="DNI" >  
+		            #{usuario.dni}  
+		        </p:column>
+		        
+		        <p:column headerText="Estado" >  
+		            <h:outputText value="#{usuario.flagActivo==0 ? 'Desactivado' : 'Activado'}"/>  
+		        </p:column>  	  		    	
+
+		        <f:facet name="footer">  
+		           <p:commandButton id="btnInsertarUsuario" value="Agregar nuevo"  
+		            	  	onclick="insertUsuario.show()"
+             	   />   
+		       	   <p:commandButton id="btnActualizarUsuario" value="Actualizar datos"
+		       	   			widgetVar="btnActualizarUsuario"
+		             	    onclick="actualizarUsuario.show()"
+		               	 	disabled="#{empty mantUsuarioEmpresaAction.usuarioSeleccionado}"
+             	   />   
+		           <p:commandButton id="btnActEstadoUsuario" value="Cambiar estado"  
+		             		onclick="actualizarEstadoUsuario.show()"
+		             		widgetVar="btnActEstadoUsuario"
+		               	 	disabled="#{empty mantUsuarioEmpresaAction.usuarioSeleccionado}"		               	 			 
+             	   />
+					<p:commandButton id="btnCambioPasswUsuario" value="Cambiar password"  
+		            	 	onclick="confirmaCambioPassw.show()"
+		             		widgetVar="btnAnularUsuario"
+		               	 	disabled="#{empty mantUsuarioEmpresaAction.usuarioSeleccionado}"
+             		/>
+				</f:facet>  
+				</p:dataTable>
+			</p:panel>
+			</h:form>
+	
+	<!-- Insertar Usuario -->
+	<h:form id="insertForm">  
+ 		<p:dialog id="insertDialog" header="Agregar Usuario" widgetVar="insertUsuario" resizable="false">  
+        	<h:panelGrid columns="2" cellpadding="5">        
+        	<h:outputLabel for="txtApellidoPaterno" value="Apellido Paterno:" />  
+            <p:inputText value="#{mantUsuarioEmpresaAction.usuarioNuevo.apellidoPat}" id="txtApellidoPaterno" required="true"  />         
+        	<h:outputLabel for="txtApellidoMaterno" value="Apellido Materno:" />  
+            <p:inputText value="#{mantUsuarioEmpresaAction.usuarioNuevo.apellidoMat}" id="txtApellidoMaterno" required="true"  />           
+            <h:outputLabel for="txtNombres" value="Nombres:" />  
+            <p:inputText value="#{mantUsuarioEmpresaAction.usuarioNuevo.nombres}" id="txtNombres" required="true"  />                    
+            <h:outputLabel for="txtDNI" value="DNI:" />  
+            <p:inputText value="#{mantUsuarioEmpresaAction.usuarioNuevo.dni}" id="txtDNI" required="true"  />                
+            <h:outputLabel for="txtUsuario" value="Usuario:" />  
+            <p:inputText value="#{mantUsuarioEmpresaAction.usuarioNuevo.usuario}" id="txtUsuario" required="true"  />                    
+            <h:outputLabel for="txtPassword" value="Password:" />  
+            <p:inputText value="#{mantUsuarioEmpresaAction.usuarioNuevo.password}" id="txtPassword" required="true"  />                          
+            <f:facet name="footer">  
+                <p:commandButton id="btnInsertar" value="Agregar" update="insertDialog :frmUsuariosEmpresa:tableUsuarios" oncomplete="insertUsuario.hide()"  
+                    actionListener="#{mantUsuarioEmpresaAction.insertarUsuario}"   
+                    />  
+                <p:commandButton id="btnDeclineInsertar" value="Cancelar"  onclick="insertUsuario.hide()" type="button" />   
+            </f:facet>              
+        	</h:panelGrid>            
+		</p:dialog>  
+	</h:form>  	       	   
+    <!--  Actualizar Usuario -->
+    <h:form id="updateForm"> 
+		<p:dialog id="updateDialog" header="Actualizar Usuario" widgetVar="actualizarUsuario" resizable="false">
+  	    	<h:panelGrid columns="2" cellpadding="5">
+      		<h:outputLabel for="txtApellidoPaterno" value="Apellido Paterno:" />  
+            <p:inputText value="#{mantUsuarioEmpresaAction.usuarioSeleccionado.apellidoPat}" id="txtApellidoPaterno" required="true"  />         
+        	<h:outputLabel for="txtApellidoMaterno" value="Apellido Materno:" />  
+            <p:inputText value="#{mantUsuarioEmpresaAction.usuarioSeleccionado.apellidoMat}" id="txtApellidoMaterno" required="true"  />           
+            <h:outputLabel for="txtNombres" value="Nombres:" />  
+			<p:inputText value="#{mantUsuarioEmpresaAction.usuarioSeleccionado.nombres}" id="txtNombres" required="true"  />                    
+			<h:outputLabel for="txtDNI" value="DNI:" />  
+			<p:inputText value="#{mantUsuarioEmpresaAction.usuarioSeleccionado.dni}" id="txtDNI" required="true"  />                
+			<h:outputLabel value="Usuario:" />  
+			<h:outputLabel value="#{mantUsuarioEmpresaAction.usuarioSeleccionado.usuario}" />                    
+			<h:outputLabel for="txtPassword" value="Password:" />  
+            <p:inputText value="#{mantUsuarioEmpresaAction.usuarioSeleccionado.password}" id="txtPassword" required="true"  />
+	            <f:facet name="footer">  
+					<p:commandButton id="btnActualizar" value="Actualizar" update=":frmUsuariosEmpresa:tableUsuarios"   oncomplete="actualizarUsuario.hide()"  
+						actionListener="#{mantUsuarioEmpresaAction.actualizarUsuario}"   
+                   		/>  
+					<p:commandButton id="btnDeclineActualizar" value="Cancelar" onclick="actualizarUsuario.hide()" type="button" />
+				</f:facet>  
+			</h:panelGrid>              
+		</p:dialog>  
+	</h:form>     
+
+	    <!--  Actualizar Estado Usuario -->
+	    <h:form id="actEstadoForm"> 
+  	 	<p:dialog id="actEstadoDialog" header="Cambiar estado Usuario" widgetVar="actualizarEstadoUsuario" resizable="false" >  	 		
+			¿Desea cambiar el estado del usuario seleccionado a 
+			<h:outputText id="txtActEstValue" value="#{mantUsuarioEmpresaAction.usuarioSeleccionado.flagActivo==0 ? 'Activado' : 'Desactivado'}" style="font-weight:bold"/>
+			? 
+			
+			<f:facet name="footer">  
+	                <p:commandButton id="btnAcceptActEstado" value="Cambiar estado" update=":frmUsuariosEmpresa:tableUsuarios"   
+	                    oncomplete="actualizarEstadoUsuario.hide()"  
+	                    actionListener="#{mantUsuarioEmpresaAction.cambiarEstadoActivacionUsuario}"   
+                    />  
+	                <p:commandButton id="btnCancelActEstado" value="Cancelar" onclick="actualizarEstadoUsuario.hide()" type="button" />
+            </f:facet>  
+             
+	    </p:dialog>  
+    </h:form>
+         
+	<!--  Cambio Password Usuario -->
+	<h:form id="changeForm"> 
+  	 	<p:dialog id="passwDialog" header="Cambiar Password de Usuario" widgetVar="cambiarPassw" resizable="false">
+  	    	<h:panelGrid columns="2" cellpadding="5">
+      		<h:outputLabel value="Usuario:" />  
+            <h:outputLabel value="#{mantUsuarioEmpresaAction.usuarioSeleccionado.usuario}" />                    
+            <h:outputLabel for="txtPassword" value="Nuevo Password:" />  
+            <p:inputText value="#{mantUsuarioEmpresaAction.usuarioSeleccionado.password}" id="txtPassword" required="true"  />
+	            <f:facet name="footer">  
+	                <p:commandButton id="btnPassw" value="Passw" update=":frmUsuariosEmpresa:tableUsuarios"   
+	                    oncomplete="actualizarPassw.hide()"  
+	                    actionListener="#{mantUsuarioEmpresaAction.actualizarUsuario}"   
+                    />  
+	                <p:commandButton id="btnDeclineCambiar" value="Cancelar" onclick="cambiarPassw.hide()" type="button" />
+	            </f:facet>  
+            </h:panelGrid>              
+	    </p:dialog>  
+    </h:form>     
+ 		</ui:define> 		
+	</ui:composition>
+</h:body>
+</html>

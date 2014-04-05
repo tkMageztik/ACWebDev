@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://java.sun.com/jsf/html" 
+    xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+      
+<h:head>
+
+</h:head> 
+<h:body>
+	<ui:composition template="/facelets/templates/intranet/intLayout.xhtml">
+<!-- 		<ui:param name="compHeaderImage" value="/imagenes/quienes.jpg" /> -->
+ 		<ui:define name="content">	
+ 		      <p:growl showDetail="true" autoUpdate="true" />
+ 			  <h:form id="tableForm">  
+			  <h:panelGrid columns="2" id="pngSearchPet">
+				<h:outputText value="RUC / DNI : " />
+				<p:inputText value="#{rfid.idRfid}" />
+				<p:commandButton value="Buscar" action="#{buscarUsuarioAction.findUserxEmpresa}" />
+				<h:outputText value="" />				
+			  </h:panelGrid>			
+    	      <p:dataTable id="tableUsuarios" var="usuario" value="#{usuEmpRegistroAction.listaUsuariosEmpresa}" rowKey="#{usuario.id}"
+    	        wigdetvar="tableUsuarios"  
+		        selection="#{usuEmpRegistroAction.usuarioSeleccionado}" 
+		        selectionMode="single">  
+
+	  	  		<p:ajax event="rowSelect"    
+                    update="btnActualizarUsuario :updateForm:updateDialog"  />
+                      
+		        <f:facet name="header">  
+		            Lista de Usuarios / Entidad : VETERINARIA RONDON (Colocar la Razon Social)	  
+		        </f:facet>  
+
+		        <p:column headerText="Login">  
+		            #{usuario.usuario}  
+		        </p:column>  
+
+		        <p:column headerText="Password">  
+		            #{usuario.password}  
+		        </p:column>  
+
+		        <p:column headerText="Nombres" >  
+		            #{usuario.nombres}  
+		        </p:column>
+		        
+		        <p:column headerText="Apellido Paterno" >  
+		            #{usuario.apellidoPat}  
+		        </p:column>  		  
+		        
+		        <p:column headerText="Apellido Materno" >  
+		            #{usuario.apellidoMat}  
+		        </p:column>  		    		  
+
+				 <p:column headerText="DNI" >  
+		            #{usuario.dni}  
+		        </p:column>
+		        
+		        <p:column headerText="Estado" >  
+		            #{usuario.flagActivo}  
+		        </p:column>  	  		    	
+
+		        <f:facet name="footer">  
+
+		           <p:commandButton id="btnInsertarUsuario" value="Agregar"  
+		            	  onclick="insertUsuario.show()"
+             	   />   
+		       	   <p:commandButton id="btnActualizarUsuario" value="Actualizar"
+		       	   			widgetVar="btnActualizarUsuario"
+		             	    onclick="actualizarUsuario.show()"
+		               	 	disabled="#{empty usuEmpRegistroAction.usuarioSeleccionado}"
+             	   />   
+		           <p:commandButton id="btnAnularUsuario" value="Anular"  
+		             	onclick="confirmaAnular.show()"
+		             		widgetVar="btnAnularUsuario"
+		               	 	disabled="#{empty UsuarioManaged.usuarioAnular}"
+             	   />
+		           <p:commandButton id="btnCambioPasswUsuario" value="Password"  
+		             	onclick="confirmaCambioPassw.show()"
+		             		widgetVar="btnAnularUsuario"
+		               	 	disabled="#{empty UsuarioManaged.usuarioCambioPassw}"
+             	   />
+		        </f:facet>  
+		    </p:dataTable>
+   	   </h:form>
+ 		<!-- Insertar Usuario -->
+ 		<h:form id="insertForm">  
+ 		 <p:dialog id="insertDialog" header="Agregar Usuario" widgetVar="insertUsuario" resizable="false">  
+        <h:panelGrid columns="2" cellpadding="5">        
+        	<h:outputLabel for="txtApellidoPaterno" value="Apellido Paterno:" />  
+            <p:inputText value="#{usuEmpRegistroAction.oUsuario.apellidoPat}" id="txtApellidoPaterno" required="true"  />         
+        	<h:outputLabel for="txtApellidoMaterno" value="Apellido Materno:" />  
+            <p:inputText value="#{usuEmpRegistroAction.oUsuario.apellidoMat}" id="txtApellidoMaterno" required="true"  />           
+            <h:outputLabel for="txtNombres" value="Nombres:" />  
+            <p:inputText value="#{usuEmpRegistroAction.oUsuario.nombres}" id="txtNombres" required="true"  />                    
+            <h:outputLabel for="txtDNI" value="DNI:" />  
+            <p:inputText value="#{usuEmpRegistroAction.oUsuario.dni}" id="txtDNI" required="true"  />                
+            <h:outputLabel for="txtUsuario" value="Usuario:" />  
+            <p:inputText value="#{usuEmpRegistroAction.oUsuario.usuario}" id="txtUsuario" required="true"  />                    
+            <h:outputLabel for="txtPassword" value="Password:" />  
+            <p:inputText value="#{usuEmpRegistroAction.oUsuario.password}" id="txtPassword" required="true"  />                          
+            <f:facet name="footer">  
+                <p:commandButton id="btnInsertar" value="Agregar" update="insertDialog :tableForm:tableUsuarios" oncomplete="insertUsuario.hide()"  
+                    actionListener="#{usuEmpRegistroAction.insertarUsuario}"   
+                    />  
+                <p:commandButton id="btnDeclineInsertar" value="Cancelar"  onclick="insertUsuario.hide()" type="button" />   
+            </f:facet>              
+               </h:panelGrid>            
+	    </p:dialog>  
+	       </h:form>  	       	   
+	    <!--  Actualizar Usuario -->
+	    <h:form id="updateForm"> 
+  	 	<p:dialog id="updateDialog" header="Actualizar Usuario" widgetVar="actualizarUsuario" resizable="false">
+  	    	<h:panelGrid columns="2" cellpadding="5">
+      		<h:outputLabel for="txtApellidoPaterno" value="Apellido Paterno:" />  
+            <p:inputText value="#{usuEmpRegistroAction.usuarioSeleccionado.apellidoPat}" id="txtApellidoPaterno" required="true"  />         
+        	<h:outputLabel for="txtApellidoMaterno" value="Apellido Materno:" />  
+            <p:inputText value="#{usuEmpRegistroAction.usuarioSeleccionado.apellidoMat}" id="txtApellidoMaterno" required="true"  />           
+            <h:outputLabel for="txtNombres" value="Nombres:" />  
+            <p:inputText value="#{usuEmpRegistroAction.usuarioSeleccionado.nombres}" id="txtNombres" required="true"  />                    
+            <h:outputLabel for="txtDNI" value="DNI:" />  
+            <p:inputText value="#{usuEmpRegistroAction.usuarioSeleccionado.dni}" id="txtDNI" required="true"  />                
+            <h:outputLabel value="Usuario:" />  
+            <h:outputLabel value="#{usuEmpRegistroAction.usuarioSeleccionado.usuario}" />                    
+            <h:outputLabel for="txtPassword" value="Password:" />  
+            <p:inputText value="#{usuEmpRegistroAction.usuarioSeleccionado.password}" id="txtPassword" required="true"  />
+	            <f:facet name="footer">  
+	                <p:commandButton id="btnActualizar" value="Actualizar" update=":tableForm:tableUsuarios"   oncomplete="actualizarUsuario.hide()"  
+	                    actionListener="#{usuEmpRegistroAction.actualizarUsuario}"   
+	                    />  
+	                <p:commandButton id="btnDeclineActualizar" value="Cancelar" onclick="actualizarUsuario.hide()" type="button" />
+	            </f:facet>  
+            </h:panelGrid>              
+	    </p:dialog>  
+    </h:form>     
+	    <!--  Anular Usuario -->
+	    <h:form id="deleteForm"> 
+  	 	<p:dialog id="deleteDialog" header="Anular Usuario" widgetVar="anularUsuario" resizable="false">
+  	    	<h:panelGrid columns="2" cellpadding="5">
+      		<h:outputLabel for="txtApellidoPaterno" value="Apellido Paterno:" />  
+            <p:inputText value="#{usuEmpRegistroAction.usuarioSeleccionado.apellidoPat}" id="txtApellidoPaterno"  />         
+        	<h:outputLabel for="txtApellidoMaterno" value="Apellido Materno:" />  
+            <p:inputText value="#{usuEmpRegistroAction.usuarioSeleccionado.apellidoMat}" id="txtApellidoMaterno" />           
+            <h:outputLabel for="txtNombres" value="Nombres:" />  
+            <p:inputText value="#{usuEmpRegistroAction.usuarioSeleccionado.nombres}" id="txtNombres" />                    
+            <h:outputLabel for="txtDNI" value="DNI:" />  
+            <p:inputText value="#{usuEmpRegistroAction.usuarioSeleccionado.dni}" id="txtDNI" />                
+            <f:facet name="footer">  
+                <p:commandButton id="btnAular" value="Anular" update=":tableForm:tableUsuarios"
+                                 oncomplete="anularUsuario.hide()"  
+                                 actionListener="#{usuEmpRegistroAction.anularUsuario}"   
+                />  
+                <p:commandButton id="btnCancelar" value="Cancelar" 
+                                 onclick="anularUsuario.hide()" type="button" />
+            </f:facet>  
+            </h:panelGrid>              
+	    </p:dialog>  
+    </h:form>     
+	    <!--  Cambio Password Usuario -->
+	    <h:form id="changeForm"> 
+  	 	<p:dialog id="passwDialog" header="Cambiar Password de Usuario" widgetVar="cambiarPassw" resizable="false">
+  	    	<h:panelGrid columns="2" cellpadding="5">
+      		<h:outputLabel for="txtApellidoPaterno" value="Apellido Paterno:" />  
+            <p:inputText value="#{usuEmpRegistroAction.usuarioSeleccionado.apellidoPat}" id="txtApellidoPaterno" required="true"  />         
+        	<h:outputLabel for="txtApellidoMaterno" value="Apellido Materno:" />  
+            <p:inputText value="#{usuEmpRegistroAction.usuarioSeleccionado.apellidoMat}" id="txtApellidoMaterno" required="true"  />           
+            <h:outputLabel for="txtNombres" value="Nombres:" />  
+            <p:inputText value="#{usuEmpRegistroAction.usuarioSeleccionado.nombres}" id="txtNombres" required="true"  />                    
+            <h:outputLabel value="Usuario:" />  
+            <h:outputLabel value="#{usuEmpRegistroAction.usuarioSeleccionado.usuario}" />                    
+            <h:outputLabel for="txtPassword" value="Nuevo Password:" />  
+            <p:inputText value="#{usuEmpRegistroAction.usuarioSeleccionado.password}" id="txtPassword" required="true"  />
+	            <f:facet name="footer">  
+	                <p:commandButton id="btnPassw" value="Passw" update=":tableForm:tableUsuarios"   
+	                    oncomplete="actualizarPassw.hide()"  
+	                    actionListener="#{usuEmpRegistroAction.cambiarpassword}"   
+                    />  
+	                <p:commandButton id="btnDeclineCambiar" value="Cancelar" onclick="cambiarPassw.hide()" type="button" />
+	            </f:facet>  
+            </h:panelGrid>              
+	    </p:dialog>  
+    </h:form>     
+ 		</ui:define> 		
+	</ui:composition>
+</h:body>
+</html>

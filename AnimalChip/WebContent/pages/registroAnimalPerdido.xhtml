@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://java.sun.com/jsf/html" 
+    xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+      
+<h:head>
+
+</h:head> 
+<h:body>
+	<ui:composition template="/facelets/templates/intranet/intLayout.xhtml">
+ 		<ui:define name="content">	
+			<h:panelGrid width="100%">
+			<p:fieldset legend="Registro de Perdida de Mascota">
+				
+			<h:form id="myForm">			
+						
+				<p:panel header="Buscar Mascota por Microchip">
+					<h:panelGrid columns="4">
+					
+						<h:outputText value="Código Microchip" style="width:100px;"/>
+						<p:spacer width="100" height="25" />
+						<p:inputMask value="#{registroMascotaExtraviada.codigoRfid}" mask="999999999999999"/>
+						
+						<p:commandButton value="Buscar Mascota" action="#{registroMascotaExtraviada.buscarMascota}" update="pnlMascota"/>								
+					
+					</h:panelGrid>		
+											
+				</p:panel>
+				
+				<p:panel header="Datos de la Mascota" id="pnlMascota" >
+					<h:panelGrid columns="3">
+						
+						<h:outputText value="Código Microchip" style="width:100px;"/>
+						<p:spacer width="100" height="25" />
+						<h:inputText id="txtRfidMascota" value="#{registroMascotaExtraviada.mascota.rfid.codInterno}" style="font-weight:bold" disabled="true"/>  
+																							
+						<h:outputText value="Raza/Especie" style="width:100px;"/>
+						<p:spacer width="100" height="25" />
+						<h:inputText value="#{registroMascotaExtraviada.mascota.razaMascota}" style="font-weight:bold" disabled="true"/>
+										
+						<h:outputText value="Color" style="width:100px;"/>
+						<p:spacer width="100" height="25" />
+						<h:inputText value="#{registroMascotaExtraviada.mascota.colorMascota}" style="font-weight:bold" disabled="true"/>										
+										
+						<h:outputText value="Genero" style="width:100px;"/>
+						<p:spacer width="100" height="25" />
+						<h:inputText value="#{registroMascotaExtraviada.mascota.generoMascota}" style="font-weight:bold" disabled="true"/>
+						
+						<h:outputText value="Nombre" style="width:100px;"/>
+						<p:spacer width="100" height="25" />
+						<h:inputText value="#{registroMascotaExtraviada.mascota.nombreMascota}" style="font-weight:bold" disabled="true"/>
+						
+						<h:outputText value="Fecha Nacimiento" style="width:100px;"/>
+						<p:spacer width="100" height="25" />
+						<h:outputText value="#{registroMascotaExtraviada.mascota.fchNacMascota}" >
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+		            	</h:outputText>  
+						
+						<h:outputText value="Registrar como Extraviado" style="width:100px;"/>
+						<p:spacer width="100" height="25" />
+						<p:commandButton value="Extraviado" onclick="registrarExtraviado.show()" disabled="#{empty registroMascotaExtraviada.mascota}"/>
+						
+					</h:panelGrid>											
+				</p:panel>
+				<p:dialog id="extravDialog" header="Registrar como Extraviado" widgetVar="registrarExtraviado" resizable="false">				
+					<h:panelGrid columns="1" cellpadding="5">		
+						<h:outputText value="¿Desea registrar la mascota como extraviada?"/>	
+					</h:panelGrid>
+					
+					<f:facet name="footer">  
+					<p:commandButton id="btnAceptar" value="Aceptar" update=":myForm"   oncomplete="registrarExtraviado.hide()"  
+						actionListener="#{registroMascotaExtraviada.registrarMascotaExtraviada}"   
+                   		/>  
+					<p:commandButton id="btnCancelar" value="Cancelar" onclick="registrarExtraviado.hide()" type="button" />					
+					</f:facet>  
+				</p:dialog>
+			
+				<p:growl showDetail="true" autoUpdate="true" />
+			</h:form>
+			
+			</p:fieldset>
+		
+			</h:panelGrid>
+ 		</ui:define>
+ 		
+	</ui:composition>
+</h:body>
+
+</html>

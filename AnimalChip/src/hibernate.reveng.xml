@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-catalog="chip247" match-name="foto"/>
+  <table-filter match-catalog="chip247" match-name="mascota"/>
+  <table-filter match-catalog="chip247" match-name="veterinario"/>
+  <table-filter match-catalog="chip247" match-name="ficha"/>
+  <table-filter match-catalog="chip247" match-name="rfid"/>
+</hibernate-reverse-engineering>

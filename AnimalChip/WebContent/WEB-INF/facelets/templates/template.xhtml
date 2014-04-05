@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<ui:insert name="head"></ui:insert>
+	<f:loadBundle var="tit"
+		basename="proyectos.cibertec.web.recurso.titulos" />
+	<f:loadBundle var="msg"
+		basename="proyectos.cibertec.web.recurso.messages" />
+	<link rel="stylesheet" type="text/css" href="../css/estilos.css" />
+	<link rel="stylesheet" type="text/css" href="css/estilos.css" />
+</h:head>
+
+<h:body>
+<!-- 	<p:panelGrid columns="1" -->
+<!-- 		style="width:100%; position: absolute; margin-top: 96px;"> -->
+<!-- 		<f:facet name="header"> -->
+<!-- 			<div style="height: 186px;">&nbsp;</div> -->
+<!-- 		</f:facet> -->
+<!-- 	</p:panelGrid> -->
+	<!-- 
+	<div
+		style="width: 100%; height: 1080px; background-color: rgb(174, 182, 207); position: absolute; top: 200px;" />
+ 	-->
+
+	<div id="pageContent">
+
+		<div id="homeInfo">
+			<ui:insert name="homeInfo">
+				<div style="position: absolute; right: 0px;">
+					<h:form>
+						<p:commandButton value="Logout"
+							action="#{inicioAction.irCerrarSesion}" />
+					</h:form>
+				</div>
+			</ui:insert>
+		</div>
+
+		<div id="menuContent">
+			<ui:insert name="menu"></ui:insert>
+		</div>
+
+<!-- 		<div id="headerContent"> -->
+<!-- 			<p:graphicImage value="/images/login/Banner.png" height="195" -->
+<!-- 				width="100%" /> -->
+<!-- 		</div> -->
+
+		<div id="userMenu">
+			<ui:insert name="menuIzquierda">
+				<ui:include src="/pages/UsuarioPerfil.xhtml" />
+			</ui:insert>
+		</div>
+
+
+		<div id="bodyContent">
+			<ui:insert name="body"></ui:insert>
+		</div>
+
+		<div id="footerContent">
+			<p:panelGrid columns="1" style="width:100%;">
+				<f:facet name="footer">
+					<div style="width: 100%; text-align: center;">
+						Powered by Cibertec | Copyright &copy; 2012<br /> All rights reserved.
+					</div>
+				</f:facet>
+			</p:panelGrid>
+		</div>
+
+	</div>
+</h:body>
+
+</html>

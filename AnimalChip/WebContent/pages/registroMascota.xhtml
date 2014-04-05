@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://java.sun.com/jsf/html" 
+    xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+      
+<h:head>
+
+</h:head> 
+<h:body>
+	<ui:composition template="/facelets/templates/intranet/intLayout.xhtml">
+ 		<ui:define name="content">		
+			<h:panelGrid width="100%">
+			
+			<p:fieldset legend="Registro de Mascota">
+			
+			<h:form id="frmBuscarRfid" >			
+				<p:panel header="Microchip">					
+					<h:panelGrid columns="4">
+						<h:outputText value="Número de microchip" style="width:100px;"/>
+						<p:spacer width="100" height="25" />
+						<p:inputMask value="#{mascotaRegistroAction.codigoRfid}" mask="999999999999999"/>
+						<p:commandButton value="Buscar Tag" action="#{mascotaRegistroAction.buscarRfid}" update="txtRFID" />					
+					</h:panelGrid>		
+				</p:panel>
+	
+			<p:panel header="Datos del dueño" id="pngDatosProp">
+					<h:panelGrid columns="4">
+						<h:outputText value="Documento Identidad Dueño" style="width:100px;"/>
+						<p:spacer width="100" height="25" />
+						<h:inputText value="#{mascotaRegistroAction.propietario.documentoIdentidad}" style="font-weight:bold"/>
+						<p:commandButton value="Buscar Propietario" action="#{mascotaRegistroAction.buscarPropietario}" update="pngDatosProp txtMascotaProp "/>
+						
+						<h:outputText value="#{not mascotaRegistroAction.propietarioFlag ? 'Propietario nuevo':'Propietario encontrado'}" style="width:100px;"/>
+						<p:spacer width="100" height="25" />								
+						<h:commandLink actionListener="#{mascotaRegistroAction.limpiarPropietario}" disabled="#{empty mascotaRegistroAction.propietario}">
+							<h:outputText value="#{not mascotaRegistroAction.propietarioFlag ? '':'Limpiar selección para ingresar nuevo propietario.' }" style="width:100px;"/>
+						</h:commandLink>
+						<p:spacer width="100" height="25" />
+						
+						<h:outputText value="Nombres*" style="width:100px;"/>
+						<p:spacer width="100" height="25" />
+						<h:inputText value="#{mascotaRegistroAction.propietario.nombres}" style="font-weight:bold"  />
+						<p:spacer width="100" height="25" />
+						<h:outputText value="Apellidos*" style="width:100px;"/>
+						<p:spacer width="100" height="25" />
+						<h:inputText value="#{mascotaRegistroAction.propietario.apellidos}" style="font-weight:bold"  />
+						<p:spacer width="100" height="25" />
+						
+						<h:outputText value="Dirección" style="width:100px;"/>
+						<p:spacer width="100" height="25" />
+						<h:inputText value="#{mascotaRegistroAction.propietario.direccion}" style="font-weight:bold"  />
+						<p:spacer width="100" height="25" />
+						
+						<h:outputText value="Telefono" style="width:100px;"/>
+						<p:spacer width="100" height="25" />
+						<h:inputText value="#{mascotaRegistroAction.propietario.telefono}" style="font-weight:bold"  />
+						<p:spacer width="100" height="25" />
+						
+						<h:outputText value="Correo Electrónico*" style="width:100px;"/>
+						<p:spacer width="100" height="25" />
+						<h:inputText value="#{mascotaRegistroAction.propietario.correoElectronico}" style="font-weight:bold"  />
+						<p:spacer width="100" height="25" />						
+																	
+					</h:panelGrid>
+							
+			</p:panel>
+			
+				<p:panel header="Datos de la mascota" id="pnlMascota">
+					
+					Cargar Foto Mascota (Max 2.5 mb)
+					<p:fileUpload
+								fileUploadListener="#{mascotaRegistroAction.handleFileUpload}"
+								auto="true" mode="advanced" 
+								sizeLimit="2500000"
+								allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+								value="Cargar"
+								/>
+				
+					<h:panelGrid columns="4">
+						<h:outputText value="Código Microchip" style="width:100px;"/>
+						<p:spacer width="100" height="25" />
+						<h:inputText id="txtRFID" value="#{mascotaRegistroAction.rfid.codInterno}" style="font-weight:bold" disabled="true" />
+						<p:spacer width="100" height="25" />
+						
+						<h:outputText value="Documento Identidad Propietario" style="width:100px;"/>
+						<p:spacer width="100" height="25" />
+						<h:inputText id="txtMascotaProp" value="#{mascotaRegistroAction.propietario.documentoIdentidad}" style="font-weight:bold" disabled="true" />
+						<p:spacer width="100" height="25" />													
+						
+						<h:outputText value="Raza/Especie" style="width:100px;"/>
+						<p:spacer width="100" height="25" />
+						<h:inputText value="#{mascotaRegistroAction.mascota.razaMascota}" style="font-weight:bold"  />
+						<p:spacer width="100" height="25" />
+										
+						<h:outputText value="Sexo" style="width:100px;"/>
+						<p:spacer width="100" height="25" />
+						<h:inputText value="#{mascotaRegistroAction.mascota.generoMascota}" style="font-weight:bold" />
+						<p:spacer width="100" height="25" />
+						
+						<h:outputText value="Nombre" style="width:100px;"/>
+						<p:spacer width="100" height="25" />
+						<h:inputText value="#{mascotaRegistroAction.mascota.nombreMascota}" style="font-weight:bold" />
+						<p:spacer width="100" height="25" />
+						
+						<h:outputText value="Color" style="width:100px;"/>
+						<p:spacer width="100" height="25" />
+						<h:inputText value="#{mascotaRegistroAction.mascota.colorMascota}" style="font-weight:bold"  />
+						<p:spacer width="100" height="25" />
+						
+						<h:outputText value="Fecha Nac." style="width:100px;"/>
+						<p:spacer width="100" height="25" />
+						<p:calendar value="#{mascotaRegistroAction.mascota.fchNacMascota}" pattern="dd/MM/yyyy" />
+						<p:spacer width="100" height="25" />
+						
+						<h:outputText value="Registrar Mascota" style="width:100px;"/>
+						<p:spacer width="100" height="25" />
+						<p:commandButton value="Registrar Mascota" target="_blank" action="#{mascotaRegistroAction.registrarMascota}" update="txtMascotaProp" ajax="false"/>
+						<p:spacer width="100" height="25" />
+						
+						
+					</h:panelGrid>
+					
+				</p:panel>
+				
+			</h:form>
+			</p:fieldset>
+			
+			</h:panelGrid>
+			
+			<p:growl showDetail="true" autoUpdate="true" />
+ 		</ui:define>
+ 		
+	</ui:composition>
+</h:body>
+
+</html>

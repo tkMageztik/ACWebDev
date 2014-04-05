@@ -1,0 +1,55 @@
+div#pageContent{
+    position:absolute;
+    left:50%;
+    width:1320px;
+    margin-left:-660px;
+}
+
+div#homeInfo
+{
+    width:100%;
+    height:48px;     
+	}
+    
+div#headerContent
+{
+    width:100%;
+    height:200px;       
+	}
+
+div#menuContent
+{
+    width:100%;
+    height:48px;
+    
+    font: bold 12px arial;
+    text-transform: uppercase;
+    }
+    
+div#userMenu
+{
+    float:left;
+    width:270px;
+}
+
+div#bodyContent
+{
+	float:left;
+	width: 1030px;
+	min-height: 1080px;
+	margin-left: 20px;
+	margin-bottom: 81px;
+}
+
+div#footerContent
+{
+	position: absolute;
+    bottom:9px;
+    width:100%;
+    color: white;
+}
+
+.ui-accordion .ui-accordion-header {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

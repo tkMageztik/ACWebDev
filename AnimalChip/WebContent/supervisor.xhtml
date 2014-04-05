@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://java.sun.com/jsf/html" 
+    xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+      
+<h:head>
+
+</h:head> 
+<h:body>
+	<ui:composition template="/facelets/templates/layout.xhtml">
+		<ui:param name="compHeaderImage" value="/imagenes/quienes.jpg" />
+ 		<ui:define name="content">	
+ 			<h:form prependId="false">
+ 			<p:growl showDetail="true" autoUpdate="true" />
+ 			
+ 			
+			<h:panelGrid columns="2" id="pngIngresoLogin">
+				<h:outputText value="Usuario:" />
+				<p:inputText value="#{usuarioLoginAction.usuarioBean.login}" />
+
+				<h:outputText value="Contraseña:" />
+				<p:password password="true"
+					value="#{usuarioLoginAction.usuarioBean.clave}" />
+				
+				<h:outputText value="" />
+				
+				<p:commandButton value="Ingresar"
+					action="#{usuarioLoginAction.validarIngresoSupervisor}" />
+
+			</h:panelGrid>
+			
+			<h:link value="Registrate Aquí" outcome="/registro" />
+			
+			
+		</h:form>
+ 		</ui:define>
+ 		
+	</ui:composition>
+</h:body>
+
+</html>

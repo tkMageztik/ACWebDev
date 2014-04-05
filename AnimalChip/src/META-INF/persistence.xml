@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
+	                    http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+	<persistence-unit name="PU-1">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+	    <class>proyectos.cibertec.core.entity.Rol</class>
+   	    <class>proyectos.cibertec.core.entity.DetalleMovimiento</class>
+	    <class>proyectos.cibertec.core.entity.DetalleRol</class>
+	    <class>proyectos.cibertec.core.entity.Empresa</class>
+	    <class>proyectos.cibertec.core.entity.Foto</class>
+	    <class>proyectos.cibertec.core.entity.Mascota</class>
+	    <class>proyectos.cibertec.core.entity.Movimiento</class>
+	    <class>proyectos.cibertec.core.entity.Propietario</class>
+	    <class>proyectos.cibertec.core.entity.Rfid</class>
+	    <class>proyectos.cibertec.core.entity.TipoMovimiento</class>
+	    <class>proyectos.cibertec.core.entity.Usuario</class>	
+		<class>proyectos.cibertec.core.entity.MascotaExtraviada</class>
+		<class>proyectos.cibertec.core.entity.FichaMedica</class>
+		<class>proyectos.cibertec.core.entity.TipoEntidad</class>				
+	
+		<properties>
+			<property name="javax.persistence.jdbc.driver"  value="com.mysql.jdbc.Driver"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/animalc_chip247"/>
+			<property name="javax.persistence.jdbc.user" value="animalc_admin"/>
+			<property name="javax.persistence.jdbc.password" value="myadmin"/>
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.format_sql" value="true"/>
+
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+
+			<property name="hibernate.hbm2ddl.auto" value="update"/>
+			
+			<!-- 
+				validate: validate the schema, makes no changes to the database. (No corre?)
+				update: update the schema.
+				create: creates the schema, destroying previous data.
+				create-drop: drop the schema at the end of the session.
+			 -->
+
+		</properties>
+	</persistence-unit>
+</persistence>

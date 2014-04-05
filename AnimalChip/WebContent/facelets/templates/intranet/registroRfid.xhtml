@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://java.sun.com/jsf/html" 
+    xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+      
+<h:head>
+
+</h:head> 
+<h:body>
+	<ui:composition template="/facelets/templates/intranet/intLayout.xhtml">
+ 		<ui:define name="content">	
+ 							<p:growl showDetail="true" autoUpdate="true" />
+ 				<h:panelGrid width="100%">
+			<p:fieldset legend="Registro de Chips">
+				<h:form>
+
+					<p:accordionPanel id="acpDatosRegistro" multiple="true">
+						
+						<p:tab title="Datos del Ingreso">
+							<h:panelGrid columns="3" id="pngDatos">
+								
+								<h:outputText value="Producto" style="width:100px;"/>
+								<p:spacer width="100" height="25" />
+								<h:outputText value="Chip 247 RFID" style="font-weight:bold"/>	
+								
+								<h:outputText value="Cantidad" style="width:100px;"/>
+								<p:spacer width="15" height="25" />
+								<p:spinner id="spinnerBasic"   
+                    				value="#{chipRegistroAction.cantidad}" min="1" max = "999">
+                    				  <p:ajax update="chips" listener="#{chipRegistroAction.obtenerChips}" />  
+                    				</p:spinner>  
+
+								<h:outputText value="" style="width:100px;"/>
+								<p:spacer width="15" height="25" />
+
+									
+							</h:panelGrid>
+						</p:tab>
+						
+						<p:tab title="Datos de los Chips">
+						
+							<p:fileUpload
+									fileUploadListener="#{chipRegistroAction.uploadExcelRfid}"
+									auto="true" mode="advanced" update="chips"
+									sizeLimit="100000"
+									allowTypes="/(\.|\/)(xls)$/"/>
+								<h:outputText value="" />
+						
+							
+							<p:dataTable id="chips" var="chip" value="#{chipRegistroAction.lstChips}"
+							scrollable="true" scrollHeight="400">  
+  								
+						       <p:column headerText="Fecha de Registro" style="width:24%">  
+						            <h:outputText value="#{chip.fechaIngreso}" />  
+						        </p:column>
+						        
+						         <p:column headerText="RFID" style="width:24%">
+						         	<p:inputText value="#{chip.codInterno}" />
+						         	<!-- TODO: Validacion solo número -->
+						        </p:column>   
+						  
+						     
+						    </p:dataTable>
+								<h:outputText value="" style="width:100px;"/>
+								<p:spacer width="15" height="25" />
+								<p:commandButton value="Obtener" update="acpDatosRegistro"
+									actionListener="#{chipRegistroAction.registrarChips}" />
+						</p:tab>	
+						
+						
+						
+					</p:accordionPanel>
+
+
+				</h:form>
+			</p:fieldset>
+		</h:panelGrid>
+
+	
+		
+ 		</ui:define>
+ 		
+	</ui:composition>
+</h:body>
+
+</html>

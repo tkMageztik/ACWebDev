@@ -1,0 +1,21 @@
+td img {display: block;}body {
+	margin-left: 0px;
+	margin-top: 0px;
+	text-align: center;
+}
+a:link {
+	color: #FFF;
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+	color: #CCC;
+}
+a:hover {
+	text-decoration: none;
+	color: #FFF;
+}
+a:active {
+	text-decoration: none;
+	color: #CCC;
+}

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://java.sun.com/jsf/html" 
+    xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+      
+<h:head>
+
+</h:head> 
+<h:body>
+<h:outputStylesheet library="css" name="base.css"  />
+	<p:panelGrid  styleClass="templateTable">
+		<p:row>
+		<!-- Fila de Spacing -->
+			<p:column>
+				<h:graphicImage value="/imagenes/spacer.gif" width="610" height="1" border="0" style="img"/>
+			</p:column>
+			<p:column>
+				<h:graphicImage value="/imagenes/spacer.gif" width="177" height="1" border="0"/>
+			</p:column>
+			<p:column>
+				<h:graphicImage value="/imagenes/spacer.gif" width="313" height="1" border="0"/>
+			</p:column>
+			<p:column>
+				<h:graphicImage value="/imagenes/spacer.gif" width="1" height="1" border="0"/>
+			</p:column>
+		</p:row>
+	
+		<!-- Footer -->
+		<ui:composition>
+		<p:row>
+			<!-- Definir el footer aqui -->
+			<p:column colspan="3">
+				<h:graphicImage value="/imagenes/bane.jpg" width="1100" height="52" border="0"/>
+			</p:column>
+			<p:column>
+				<h:graphicImage value="/imagenes/bane.jpg" width="1" height="52" border="0"/>
+			</p:column>
+		</p:row>
+		</ui:composition>
+		
+	</p:panelGrid>
+</h:body>
+
+</html>

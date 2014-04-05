@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://java.sun.com/jsf/html" 
+    xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+      
+<h:head>
+	<ui:insert name="head"></ui:insert>
+	<f:loadBundle var="tit"
+		basename="proyectos.cibertec.web.recurso.titulos" />
+	<f:loadBundle var="msg"
+		basename="proyectos.cibertec.web.recurso.messages" />
+	<link rel="stylesheet" type="text/css" href="../css/estilos.css" />
+	<link rel="stylesheet" type="text/css" href="css/estilos.css" />
+</h:head> 
+
+<h:body>
+<div id="pageContent">
+	
+ 
+ 	<table >
+	 	<tr>
+	 		<td colspan="3">
+	 		<ui:insert name="header" >
+		  		<ui:include src="/facelets/templates/intranet/header.xhtml" />
+			</ui:insert>
+			</td>
+	 	</tr>
+ 		<tr >
+ 			<td width="2%" >
+ 			
+ 			</td>
+ 			<td width="29%" valign="top" >
+ 					<ui:insert name="sideMenu" >
+		  				<ui:include src="/facelets/templates/intranet/sideBar.xhtml" />
+					</ui:insert>
+ 	 		</td> 
+	 		<td width="70%" >
+	 		 		<ui:insert name="content" >
+				 	 	<ui:include src="/facelets/templates/intranet/content.xhtml" />
+				   	</ui:insert>
+ 			</td>
+	 	</tr>
+ 	 	<tr>
+	 		<td colspan="2">
+			 	<ui:insert name="footer" >
+					<ui:include src="/facelets/templates/intranet/footer.xhtml" />
+				</ui:insert>
+			</td>
+	 	</tr>
+ 	</table>
+ 	 
+
+
+	</div>
+</h:body>
+
+</html>

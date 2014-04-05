@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://java.sun.com/jsf/html" 
+    xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+      
+<h:head>
+
+</h:head> 
+<h:body>
+	<ui:composition template="/facelets/templates/intranet/intLayout.xhtml">
+ 		<ui:define name="content">	
+			<h:panelGrid width="100%">
+			<p:fieldset legend="Entrega de Chips">
+				<h:form id="myForm">
+				
+						
+						<p:panel header="Datos de la Entrega">
+						
+							<h:panelGrid columns="4" id="pngData">
+								
+								<h:outputText value="RUC" style="width:100px;"/>
+								<p:spacer width="100" height="25" />
+								<h:inputText value="#{chipRegEntAction.empresaBean.ruc}" style="font-weight:bold"/>														
+   								<p:commandButton value="Buscar" update="txtRazonSocial pngData"
+									action="#{chipRegEntAction.obtenerEmpresa}" />
+									
+								<h:outputText value="#{empty chipRegEntAction.empresaSeleccionada ? 'Empresa Nueva':'Empresa Encontrada'}" style="width:100px;"/>
+								<p:spacer width="100" height="25" />								
+								<h:commandLink actionListener="#{chipRegEntAction.limpiarEmpresaSeleccionada}"  disabled="#{empty chipRegEntAction.empresaSeleccionada}">
+									<h:outputText value="#{empty chipRegEntAction.empresaSeleccionada ? '':'Limpiar selección para ingresar nueva empresa.' }" style="width:100px;"/>
+								</h:commandLink>
+								<p:spacer width="100" height="25" />
+
+								<h:outputText value="Razón Social" style="width:100px;"/>
+								<p:spacer width="100" height="25" />
+								<h:inputText value="#{chipRegEntAction.empresaBean.razonSocial}" style="font-weight:bold" id="txtRazonSocial"/>
+								<p:spacer width="100" height="25" />							
+								
+								<h:outputText value="Tipo Entidad" style="width:100px;"/>
+								<p:spacer width="100" height="25" />
+								<p:selectOneMenu id="cboTipoEntidad" value="#{chipRegEntAction.empresaBean.tipoEntidad}">
+		            				<f:selectItem itemLabel="Seleccionar" itemValue="" />  
+			                		<f:selectItems value="#{chipRegEntAction.lstTipoEntidad}" 
+			                				   var="tipoEntidad"
+			                				   itemLabel="#{tipoEntidad.descripcion}"                				   
+			                		/>   
+			                		<f:converter converterId="tipocomprobanteConverter" />
+	            				</p:selectOneMenu>
+            					<p:spacer width="100" height="25" />
+								
+								<h:outputText value="Cantidad" style="width:100px;"/>
+								<p:spacer width="15" height="25" />
+								<p:spinner id="spinnerBasic"   
+                    				value="#{chipRegEntAction.cantidad}" min="1" max = "99">
+                    				  <p:ajax update="chips" listener="#{chipRegEntAction.obtenerChips}" />  
+                   				</p:spinner>                   				
+                   				<p:spacer width="100" height="25" />
+                   							
+                   				
+                   													
+							</h:panelGrid>
+							
+						</p:panel>
+		
+						<p:panel header="Datos de los Chips">
+							
+							<h:outputText value="Cargue un archivo excel o ingrese los datos manualmente." />
+							
+							
+							<p:fileUpload
+									fileUploadListener="#{chipRegEntAction.uploadExcelRfid}"
+									auto="true" mode="advanced" update="chips"
+									sizeLimit="100000"
+									allowTypes="/(\.|\/)(xls)$/"
+									value="Cargar"
+									/>
+								<h:outputText value="" />
+						
+							<h:outputText value="Lista de chips" />
+							
+							
+							<p:dataTable id="chips" var="chip" value="#{chipRegEntAction.lstChips}"
+							scrollable="true" scrollHeight="200">
+							  
+  								<p:column headerText="Nro." style="width:24%">  
+						            <h:outputText value="#{chip.correlativo}" />  
+						        </p:column>								
+  								
+  								
+						        <p:column headerText="Fecha de Registro" style="width:24%">  
+						            <h:outputText value="#{chip.fechaIngreso}" >
+						             	<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+						            </h:outputText>  
+						        </p:column>
+						        
+						         <p:column headerText="Código Microchip" style="width:24%">
+					         	     <p:inputMask value="#{chip.codInterno}" mask="999999999999999"/>  
+						        </p:column>   
+						  
+						     
+						    </p:dataTable>
+						    
+								<h:outputText value="" style="width:100px;"/>
+								<p:spacer width="15" height="25" />
+
+									<p:commandButton value="Registrar"
+									action="#{chipRegEntAction.registrarChips}" update="myForm" />
+						</p:panel>	
+						
+						
+						
+
+				</h:form>
+			</p:fieldset>
+		</h:panelGrid>
+
+		<p:growl showDetail="true" autoUpdate="true" />
+		
+ 		</ui:define>
+ 		
+	</ui:composition>
+</h:body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+
+<h:body>
+<ui:composition>
+	<p:growl showDetail="true" autoUpdate="true" />
+
+	<h:form id="PerilForm">
+		<p:fieldset legend="Perfil" rendered="#{not empty inicioAction.oVeterinario}">
+			<p:accordionPanel style="margin-left: auto; margin-right: auto;"
+				multiple="true">
+				<p:tab title="Usuario">
+					<h:panelGrid columns="1" cellpadding="9">
+						<p:graphicImage value="#{inicioAction.oVeterinario.fotoVeterinario.ruta}"
+							width="120px" height="160px">
+						</p:graphicImage>
+						<h:panelGrid columns="1">
+							<h:outputText value="ID de Usuario:" style="font-weight:bold"/>
+							<h:outputText value="#{inicioAction.oVeterinario.usuarioVet}" />
+							<p:spacer />
+							
+							<h:outputText value="Nombres:" style="font-weight:bold"/>
+							<h:outputText value="#{inicioAction.oVeterinario.nombresVet}" />
+							<p:spacer />
+							
+							<h:outputText value="Apellido Paterno:" style="font-weight:bold"/>
+							<h:outputText value="#{inicioAction.oVeterinario.apellidoPatVet}" />
+							<p:spacer />
+							
+							<h:outputText value="Apellido Materno:" style="font-weight:bold"/>
+							<h:outputText value="#{inicioAction.oVeterinario.apellidoMatVet}" />
+							<p:spacer />
+						</h:panelGrid>
+					</h:panelGrid>
+				</p:tab>
+			</p:accordionPanel>
+		</p:fieldset>
+	</h:form>
+	</ui:composition>
+</h:body>
+
+
+</html>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+	                              http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+
+	<application>
+		<locale-config>
+			<default-locale>es</default-locale>
+			<supported-locale>en</supported-locale>
+		</locale-config>
+		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+	</application>
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-action>#{usuarioLoginAction.validarIngresoUsuarioEmpresa}</from-action>
+			<from-outcome>exitosocio</from-outcome>
+			<to-view-id>/pages/main.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{usuarioLoginAction.validarIngresoProveedor}</from-action>
+			<from-outcome>exitosocio</from-outcome>
+			<to-view-id>/pages/main.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{usuarioLoginAction.validarIngresoSupervisor}</from-action>
+			<from-outcome>exitosocio</from-outcome>
+			<to-view-id>/pages/main.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-action>#{usuarioLoginAction.logout}</from-action>
+			<from-outcome>logout</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+<!-- 	<navigation-rule> -->
+<!-- 		<from-view-id>*</from-view-id> -->
+<!-- 		<navigation-case> -->
+<!-- 			<from-action>#{usuarioRegistroAction.validarIngreso}</from-action> -->
+<!-- 			<from-outcome>exitosocio</from-outcome> -->
+<!-- 			<to-view-id>/pages/main.xhtml</to-view-id> -->
+<!-- 		</navigation-case> -->
+<!-- 		<navigation-case> -->
+<!-- 			<from-action>#{usuarioRegistroAction.validarIngreso}</from-action> -->
+<!-- 			<from-outcome>errorlogin</from-outcome> -->
+<!-- 			<to-view-id>/faces/home.xhtml</to-view-id> -->
+<!-- 		</navigation-case> -->
+<!-- 	</navigation-rule> -->
+	
+<!-- 	<navigation-rule> -->
+<!-- 		<from-view-id>*</from-view-id> -->
+<!-- 		<navigation-case> -->
+<!-- 			<from-action>#{navegacionAction.irBuscarMascotaGeneral}</from-action> -->
+<!-- 			<from-outcome>buscarmascota</from-outcome> -->
+<!-- 			<to-view-id>/pages/MascotaBusqueda.xhtml</to-view-id> -->
+<!-- 		</navigation-case> -->
+<!-- 		<navigation-case> -->
+<!-- 			<from-action>#{navegacionAction.irMascotaActualizacion}</from-action> -->
+<!-- 			<from-outcome>mascotaactualizacion</from-outcome> -->
+<!-- 			<to-view-id>/pages/MascotaActualizacion.xhtml</to-view-id> -->
+<!-- 		</navigation-case> -->
+<!-- 		<navigation-case> -->
+<!-- 			<from-action>#{navegacionAction.irMascotaRegistro}</from-action> -->
+<!-- 			<from-outcome>mascotaregistro</from-outcome> -->
+<!-- 			<to-view-id>/pages/MascotaRegistro.xhtml</to-view-id> -->
+<!-- 		</navigation-case> -->
+<!-- 		<navigation-case> -->
+<!-- 			<from-action>#{navegacionAction.irChipCompra}</from-action> -->
+<!-- 			<from-outcome>comprachip</from-outcome> -->
+<!-- 			<to-view-id>/pages/ChipCompra.xhtml</to-view-id> -->
+<!-- 		</navigation-case> -->
+<!-- 		<navigation-case> -->
+<!-- 			<from-action>#{navegacionAction.irChipRegistro}</from-action> -->
+<!-- 			<from-outcome>registrochip</from-outcome> -->
+<!-- 			<to-view-id>/pages/ChipRegistro.xhtml</to-view-id> -->
+<!-- 		</navigation-case> -->
+<!-- 		<navigation-case> -->
+<!-- 			<from-action>#{navegacionAction.irVeterinarioActualizacion}</from-action> -->
+<!-- 			<from-outcome>veterinarioactualizacion</from-outcome> -->
+<!-- 			<to-view-id>/pages/VeterinarioActualizacion.xhtml</to-view-id> -->
+<!-- 		</navigation-case> -->
+<!-- 		<navigation-case> -->
+<!-- 			<from-action>#{navegacionAction.irAdministradorActualizacion}</from-action> -->
+<!-- 			<from-outcome>administradoractualizacion</from-outcome> -->
+<!-- 			<to-view-id>/pages/AdministradorActualizacion.xhtml</to-view-id> -->
+<!-- 		</navigation-case> -->
+<!-- 		<navigation-case> -->
+<!-- 			<from-action>#{navegacionAction.irActivacionCuentas}</from-action> -->
+<!-- 			<from-outcome>activacioncuentas</from-outcome> -->
+<!-- 			<to-view-id>/pages/AdministradorActivacionCuentas.xhtml</to-view-id> -->
+<!-- 		</navigation-case> -->
+<!-- 		<navigation-case> -->
+<!-- 			<from-action>#{inicioAction.irCerrarSesion}</from-action> -->
+<!-- 			<from-outcome>cerrarsesion</from-outcome> -->
+<!-- 			<to-view-id>/home.xhtml</to-view-id> -->
+<!-- 			<redirect></redirect> -->
+<!-- 		</navigation-case> -->
+<!-- 	</navigation-rule> -->
+
+<!-- 	<navigation-rule> -->
+<!-- 		<navigation-case> -->
+<!-- 			<from-action>#{navegacionAction.irInicio}</from-action> -->
+<!-- 			<from-outcome>inicio</from-outcome> -->
+<!-- 			<to-view-id>/faces/home.xhtml</to-view-id> -->
+<!-- 			<redirect></redirect> -->
+<!-- 		</navigation-case> -->
+<!-- 		<navigation-case> -->
+<!-- 			<from-action>#{navegacionAction.irVeterinarioRegistro}</from-action> -->
+<!-- 			<from-outcome>veterinarioRegistro</from-outcome> -->
+<!-- 			<to-view-id>/pages/VeterinarioRegistro.xhtml</to-view-id> -->
+<!-- 		</navigation-case> -->
+<!-- 	</navigation-rule> -->
+
+<!-- 	<navigation-rule> -->
+<!-- 		<from-view-id>*</from-view-id>  -->
+<!-- 		<navigation-case> -->
+<!-- 			<from-action>#{mascotaActualizacionAction.irFichaMedicaRegistro}</from-action> -->
+<!-- 			<from-outcome>registrofichamedica</from-outcome> -->
+<!-- 			<to-view-id>/pages/FichaMedicaRegistro.xhtml</to-view-id> -->
+<!-- 		</navigation-case> -->
+<!-- 		<navigation-case> -->
+<!-- 			<from-action>#{mascotaActualizacionAction.irFichaMedicaRegistro}</from-action> -->
+<!-- 			<from-outcome>nada</from-outcome> -->
+<!-- 			<to-view-id>/pages/MascotaActualizacion.xhtml</to-view-id> -->
+<!-- 		</navigation-case> -->
+<!-- 	</navigation-rule> -->
+	
+<!-- 	<navigation-rule> -->
+<!-- 		<from-view-id>*</from-view-id> -->
+<!-- 		<navigation-case> -->
+<!-- 			<from-action>#{veterinarioRegistroAction.validarGrabar}</from-action> -->
+<!-- 			<from-outcome>registrovet</from-outcome> -->
+<!-- 			<to-view-id>/faces/home.xhtml</to-view-id> -->
+<!-- 			<redirect></redirect> -->
+<!-- 		</navigation-case> -->
+<!-- 	</navigation-rule> -->
+	
+<!-- 	<navigation-rule> -->
+<!-- 		<from-view-id>*</from-view-id>  -->
+<!-- 		<navigation-case> -->
+<!-- 			<from-action>#{fichaMedicaRegistroAction.registrarFichaClinica}</from-action> -->
+<!-- 			<from-outcome>exitoregistroficha</from-outcome> -->
+<!-- 			<to-view-id>/pages/MascotaActualizacion.xhtml</to-view-id> -->
+<!-- 		</navigation-case> -->
+<!-- 		<navigation-case> -->
+<!-- 			<from-action>#{fichaMedicaRegistroAction.registrarFichaClinica}</from-action> -->
+<!-- 			<from-outcome>error</from-outcome> -->
+<!-- 			<to-view-id>/pages/FichaMedicaRegistro.xhtml</to-view-id> -->
+<!-- 		</navigation-case> -->
+<!-- 	</navigation-rule> -->
+
+<!-- 	<navigation-rule> -->
+<!-- 		<from-view-id>*</from-view-id>  -->
+<!-- 		<navigation-case> -->
+<!-- 			<from-action>#{mascotaRegistroAction.validarGrabar}</from-action> -->
+<!-- 			<from-outcome>chips</from-outcome> -->
+<!-- 			<to-view-id>/pages/MascotaRegistro.xhtml</to-view-id> -->
+<!-- 		</navigation-case> -->
+<!-- 		<navigation-case> -->
+<!-- 			<from-action>#{mascotaRegistroAction.validarGrabar}</from-action> -->
+<!-- 			<from-outcome>nochips</from-outcome> -->
+<!-- 			<to-view-id>/pages/ChipCompra.xhtml</to-view-id> -->
+<!-- 		</navigation-case> -->
+<!-- 	</navigation-rule> -->
+</faces-config>
