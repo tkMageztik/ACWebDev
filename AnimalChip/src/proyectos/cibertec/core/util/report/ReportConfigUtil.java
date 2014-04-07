@@ -100,5 +100,6 @@ public class ReportConfigUtil {
         exporterXLS.setParameter(JRXlsExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_ROWS, Boolean.TRUE);
         exporterXLS.exportReport();
         outputfile.write(output.toByteArray());
+        outputfile.close();
     }
 }

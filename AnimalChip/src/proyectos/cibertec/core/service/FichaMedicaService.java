@@ -6,6 +6,5 @@ import proyectos.cibertec.core.entity.FichaMedica;
 
 public interface FichaMedicaService {
 	public void insertarFichaMedica(FichaMedica fichaMedica) throws Exception;
-	public List<FichaMedica> listarFichaMedica(int idMascota) throws Exception;
-	
+	public List<FichaMedica> listarFichaMedica(int idMascota) throws Exception;	
 }

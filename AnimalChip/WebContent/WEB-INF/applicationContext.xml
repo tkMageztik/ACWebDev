@@ -34,7 +34,7 @@
 			<property name="password" value="myadmin" />		  		 
 		-->	
 		
-		<property name="url" value="jdbc:mysql://localhost:3306/chip247"/>
+		<property name="url" value="jdbc:mysql://localhost:3306/animalc_chip247"/>
 		<property name="username" value="root" />
 		<property name="password" value="mysql" />
 		
